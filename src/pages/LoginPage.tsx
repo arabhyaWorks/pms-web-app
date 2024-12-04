@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { User, Lock, Eye, EyeOff } from "lucide-react";
+import banner from "../assets/loginBanner.png";
+import ProfileButton from "../components/ProfileButton";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -19,26 +21,11 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section with Orange Overlay */}
-      <div className="relative h-[300px] bg-orange-500">
-        <img
-          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
-          alt="Building"
-          className="absolute inset-0 w-full h-full object-cover mix-blend-multiply"
-        />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Seal_of_Uttar_Pradesh.svg"
-            alt="UP Logo"
-            className="w-20 h-20 mb-4"
-          />
-          <h1 className="text-2xl font-bold text-center">
-            Program Management
-            <br />
-            System Bhadohi
-          </h1>
-        </div>
-      </div>
+      <img
+        src={banner}
+        alt="Building"
+        className=" w-full h-full object-cover"
+      />
 
       {/* Login Form */}
       <div className="px-4 pt-8">

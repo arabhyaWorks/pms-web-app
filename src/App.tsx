@@ -1,16 +1,16 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import BottomNav from './components/BottomNav';
-import HomePage from './pages/HomePage';
-import ReportsPage from './pages/ReportsPage';
-import ProjectsPage from './pages/ProjectsPage';
-import IssuesPage from './pages/IssuesPage';
-import ProjectGallery from './pages/ProjectGallery';
-import ProfilePage from './pages/ProfilePage';
-import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
-import MilestonePage from './pages/MilestonePage';
-import WelcomePage from './pages/WelcomePage';
-import LoginPage from './pages/LoginPage';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import BottomNav from "./components/BottomNav";
+import HomePage from "./pages/HomePage";
+import ReportsPage from "./pages/ReportsPage";
+import ProjectsPage from "./pages/ProjectsPage";
+import IssuesPage from "./pages/IssuesPage";
+import ProjectGallery from "./pages/ProjectGallery";
+import ProfilePage from "./pages/ProfilePage";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import MilestonePage from "./pages/MilestonePage";
+import WelcomePage from "./pages/WelcomePage";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
