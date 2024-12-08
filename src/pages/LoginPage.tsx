@@ -22,7 +22,7 @@ export default function LoginPage() {
     setErrorMessage(""); // Clear previous errors
 
     try {
-      const response = await axios.post("http://localhost:3000/api/login", credentials);
+      const response = await axios.post("https://pms-backend-ochre.vercel.app/api/login", credentials);
 
       if (response.data.success) {
         console.log("Login successful:", response.data);

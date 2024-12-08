@@ -94,14 +94,14 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </div>
 
         {/* Quick Actions */}
-        <div className="flex gap-2">
+        {/* <div className="flex gap-2">
           <button className="flex-1 px-2 py-2 text-xs font-medium rounded bg-blue-50 text-blue-600">
             {project.projectUpdate}
           </button>
           <button className="flex-1 px-2 py-1 text-xs font-medium rounded bg-orange-50 text-orange-600">
             {project.projectGallery}
           </button>
-        </div>
+        </div> */}
 
         {/* Expand/Collapse */}
         <button

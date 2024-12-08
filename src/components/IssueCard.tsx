@@ -72,14 +72,14 @@ export default function IssueCard({ issue }: IssueCardProps) {
         </div>
       </div>
 
-      <div className="flex gap-2 mt-4 pt-4 border-t">
+      {/* <div className="flex gap-2 mt-4 pt-4 border-t">
         <button className="flex-1 px-3 py-1.5 text-xs font-medium rounded bg-blue-50 text-blue-600">
           Change Status
         </button>
         <button className="flex-1 px-3 py-1.5 text-xs font-medium rounded bg-orange-50 text-orange-600">
           View Log
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }

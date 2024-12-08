@@ -33,7 +33,7 @@ export default function ProjectCard({ project, onUploadClick }: ProjectCardProps
         ))}
       </div>
 
-      <div className="px-4 py-3 bg-gray-50 flex justify-end">
+      {/* <div className="px-4 py-3 bg-gray-50 flex justify-end">
         <button
           onClick={onUploadClick}
           className="flex items-center space-x-2 px-4 py-2 bg-orange-500 text-white rounded-lg text-sm font-medium hover:bg-orange-600 transition-colors"
@@ -41,7 +41,7 @@ export default function ProjectCard({ project, onUploadClick }: ProjectCardProps
           <ImagePlus className="w-4 h-4" />
           <span>Upload Images</span>
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }

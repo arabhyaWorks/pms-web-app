@@ -43,14 +43,14 @@ export default function IssuesPage() {
             <Search className="w-5 h-5 text-gray-400 absolute left-3 top-2.5" />
           </div>
           
-          <button 
+          {/* <button 
             onClick={() => setShowFilters(!showFilters)}
             className="flex items-center gap-2 text-sm text-gray-600 bg-white px-3 py-2 rounded-lg border border-gray-300 w-full"
           >
             <Filter className="w-4 h-4" />
             Filters
             <ChevronDown className="w-4 h-4 ml-auto" />
-          </button>
+          </button> */}
 
           {showFilters && (
             <div className="bg-white p-4 rounded-lg border border-gray-200">
