@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bell } from 'lucide-react';
+import ProfileButton from './ProfileButton';
 
 export default function MobileHeader() {
   return (
@@ -10,10 +10,7 @@ export default function MobileHeader() {
         className="w-10 h-10"
       />
       <h1 className="text-lg font-bold text-gray-900">PMS Bhadohi</h1>
-      <button className="p-2 hover:bg-gray-100 rounded-full relative">
-        <Bell className="w-6 h-6 text-gray-600" />
-        <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-      </button>
+      <ProfileButton />
     </header>
   );
 }

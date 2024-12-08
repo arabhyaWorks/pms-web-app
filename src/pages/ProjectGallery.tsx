@@ -17,8 +17,8 @@ const mockProjects: Project[] = [
     title: 'Project Estimate for construction of crated stone Boulder cutter to prevent of erosion in 450 meter length at right bank of river Ganga in village- Mahuji, Block- Dhanapur Tahsil- Sakaldiha, Distt- Chandauli.',
     agency: 'Bandhi Prakhand',
     images: [
-      'https://images.unsplash.com/photo-1553434320-e9f5757140b1',
-      'https://images.unsplash.com/photo-1553434320-a4114f211e48'
+      'https://pmschandauli.com/upload/project/9/main/240108045338.png',
+      'https://pmschandauli.com/upload/project/9/main/240108045216.jpg'
     ]
   },
   {
@@ -26,8 +26,8 @@ const mockProjects: Project[] = [
     title: 'R.O.B. IN LIEU OF LC No.-102B/3E ON CHANDAULI- SAKALDIHA ROAD BETWEEN KUCHAMAN-SAKALDIHA RAILWAY STATION OF ECR RAIL SECTION IN DISTT. CHANDAULI',
     agency: 'PWD Chandauli',
     images: [
-      'https://images.unsplash.com/photo-1545119743-a8f1710a3a6d',
-      'https://images.unsplash.com/photo-1545119743-cf503f1b5c7c'
+      'https://pmschandauli.com/upload/project/26/main/231220123642.jpg',
+      'https://pmschandauli.com/upload/project/26/main/231220123543.jpg'
     ]
   }
 ];

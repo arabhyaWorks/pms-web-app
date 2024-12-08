@@ -24,10 +24,10 @@ export default function IssuesPage() {
             <h1 className="text-xl font-bold text-gray-900">Issues</h1>
             <p className="text-sm text-gray-500">Total Issues ({filteredIssues.length})</p>
           </div>
-          <button className="bg-orange-500 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 text-sm">
+          {/* <button className="bg-orange-500 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 text-sm">
             <Plus className="w-4 h-4" />
             Create Issue
-          </button>
+          </button> */}
         </div>
 
         {/* Search and Filter */}

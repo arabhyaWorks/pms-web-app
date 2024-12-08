@@ -16,10 +16,10 @@ export default function ProjectsPage() {
         {/* Header Section */}
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-xl font-bold text-gray-900">Projects</h1>
-          <button className="bg-orange-500 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 text-sm">
+          {/* <button className="bg-orange-500 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 text-sm">
             <Plus className="w-4 h-4" />
             New Project
-          </button>
+          </button> */}
         </div>
 
         {/* Search and Filter */}
