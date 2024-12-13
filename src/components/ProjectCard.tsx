@@ -7,6 +7,8 @@ import {
   Activity,
 } from 'lucide-react';
 
+import { convertToIST } from '../utils/function';
+
 interface ProjectCardProps {
   project: {
     id: string;
@@ -14,28 +16,53 @@ interface ProjectCardProps {
     projectStatus: string;
     executingAgency: string;
     approvedProjectCost: string;
-    completionDateAsPerContract: string;
-    physicalProgress: string;
+    projectCompletionDate: Date;
+    currentMonthPhysicalProgress: string;
     projectUpdate: string;
     projectGallery: string;
   };
 }
 
+
 export default function ProjectCard({ project }: ProjectCardProps) {
   const [expanded, setExpanded] = useState(false);
 
+  
+
+
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'कार्य प्रगति पर':
-        return 'bg-blue-100 text-blue-800';
-      case 'प्रारंभिक चरण':
+      case '1':
         return 'bg-yellow-100 text-yellow-800';
-      case 'योजना निर्माण':
+      case '2':
+        return 'bg-green-100 text-green-800';
+      case '3':
         return 'bg-gray-100 text-gray-800';
+        case '4':
+        return 'bg-red-100 text-red-800';
+        case '5':
+        return 'bg-green-100 text-green-800';
       default:
         return 'bg-green-100 text-green-800';
     }
   };
+
+  const getStatusValue = (status: string) => {
+    switch(status){
+      case '1':
+        return 'योजना चरण में';
+      case '2':
+        return 'प्रगति पर है';
+      case '3': 
+        return 'रोक पर';
+      case '4':
+        return 'विलंबित';
+      case '5':
+        return 'पूर्ण हुआ'
+      default:
+        return 'N/A';
+    }
+  }
 
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200">
@@ -50,7 +77,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               project.projectStatus
             )}`}
           >
-            {project.projectStatus}
+            {getStatusValue(project.projectStatus)}
           </span>
         </div>
 
@@ -59,7 +86,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           <div>
             <div className="flex items-center gap-1 text-xs text-gray-500 mb-1">
               <IndianRupee className="w-3 h-3" />
-              Budget
+              Budget (In Cr)
             </div>
             <p className="text-sm font-medium text-gray-900">
               {project.approvedProjectCost}
@@ -71,7 +98,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               Progress
             </div>
             <p className="text-sm font-medium text-gray-900">
-              {project.physicalProgress}
+              {project.currentMonthPhysicalProgress}
             </p>
           </div>
           <div>
@@ -80,7 +107,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               Deadline
             </div>
             <p className="text-sm font-medium text-gray-900">
-              {project.completionDateAsPerContract}
+              {convertToIST(project.projectCompletionDate)}
             </p>
           </div>
         </div>

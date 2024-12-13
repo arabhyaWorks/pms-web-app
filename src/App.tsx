@@ -1,5 +1,5 @@
-import React, {useEffect} from "react";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import BottomNav from "./components/BottomNav";
 import HomePage from "./pages/HomePage";
 import ReportsPage from "./pages/ReportsPage";
@@ -11,12 +11,9 @@ import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import MilestonePage from "./pages/MilestonePage";
 import WelcomePage from "./pages/WelcomePage";
 import LoginPage from "./pages/LoginPage";
-import { use } from "framer-motion/client";
+import HelpSupportPage from "./pages/HelpSupportPage";
 
 function App() {
-
-
-
   return (
     <BrowserRouter>
       <Routes>
@@ -29,6 +26,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/privacy" element={<PrivacyPolicyPage />} />
         <Route path="/milestones" element={<MilestonePage />} />
+        <Route path="/help" element={<HelpSupportPage />} />
       </Routes>
       {/* Only show BottomNav for authenticated routes */}
       <Routes>

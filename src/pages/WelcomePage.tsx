@@ -62,7 +62,7 @@ export default function WelcomePage() {
       <div className="px-4 py-4">
         <h2 className="text-[20px] font-bold text-black mb-4">About PMS</h2>
         <p className="text-[17px] text-[#666666] leading-[1.6]">
-          Project Management System is an online platform where organization can
+          Project Monitoring System is an online platform where organization can
           monitor the health status of ongoing development projects in a
           city/division on a one-click basis. This system has multiple
           parameters through which both the quality & the progress can be

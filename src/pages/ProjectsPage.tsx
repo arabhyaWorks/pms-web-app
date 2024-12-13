@@ -1,13 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { Search, Plus, Filter, ChevronDown } from 'lucide-react';
 import MobileHeader from '../components/MobileHeader';
 import ProjectCard from '../components/ProjectCard';
 import { projectsData } from '../data/projects';
+import axios from 'axios';
+
 
 export default function ProjectsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [showFilters, setShowFilters] = useState(false);
+  const [projects, setProjects] = useState([]);
 
+  async function fetchProjects() {
+    // const url = `${endpoint}/api/projects`;
+    const url = "https://pradyogik.in/api/projects/";
+
+    // const params = {
+    //   department: "",
+    //   status: "",
+    // };
+
+    try {
+      const response = await axios.get(url, {
+        headers: {
+          "Content-Type": "application/json",
+          "ngrok-skip-browser-warning": "true", // Add this header
+        },
+        // params: params,
+      });
+
+      console.log("Response Data:", response.data);
+      // return response.data;
+
+      return setProjects(response.data);
+    } catch (error) {
+      console.error(
+        "Error fetching data:",
+        error.response ? error.response.data : error.message
+      );
+      throw error;
+    }
+  }
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+
+  console.log(projects);  
+  
   return (
     <div className="pb-20 pt-16 bg-gray-50">
       <MobileHeader />
@@ -47,8 +87,8 @@ export default function ProjectsPage() {
 
         {/* Projects List */}
         <div className="space-y-4">
-          {projectsData.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+          {projects.map((project) => (
+            <ProjectCard key={1} project={project} />
           ))}
         </div>
       </div>

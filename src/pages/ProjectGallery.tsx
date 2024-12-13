@@ -14,7 +14,7 @@ interface Project {
 const mockProjects: Project[] = [
   {
     id: '1',
-    title: 'Project Estimate for construction of crated stone Boulder cutter to prevent of erosion in 450 meter length at right bank of river Ganga in village- Mahuji, Block- Dhanapur Tahsil- Sakaldiha, Distt- Chandauli.',
+    title: 'Project Estimate for construction of crated stone Boulder cutter to prevent of erosion in 450 meter length at right bank of river Ganga in village- Mahuji, Block- Dhanapur Tahsil- Sakaldiha, Distt- Bhadohi.',
     agency: 'Bandhi Prakhand',
     images: [
       'https://pmschandauli.com/upload/project/9/main/240108045338.png',
@@ -23,7 +23,7 @@ const mockProjects: Project[] = [
   },
   {
     id: '2',
-    title: 'R.O.B. IN LIEU OF LC No.-102B/3E ON CHANDAULI- SAKALDIHA ROAD BETWEEN KUCHAMAN-SAKALDIHA RAILWAY STATION OF ECR RAIL SECTION IN DISTT. CHANDAULI',
+    title: 'R.O.B. IN LIEU OF LC No.-102B/3E ON CHANDAULI- SAKALDIHA ROAD BETWEEN KUCHAMAN-SAKALDIHA RAILWAY STATION OF ECR RAIL SECTION IN DISTT. Bhadohi',
     agency: 'PWD Chandauli',
     images: [
       'https://pmschandauli.com/upload/project/26/main/231220123642.jpg',
