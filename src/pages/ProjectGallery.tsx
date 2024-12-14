@@ -6,7 +6,7 @@ import {
   Calendar,
   Plus,
 } from "lucide-react";
-
+import MobileHeader from "../components/MobileHeader";
 import axios from "axios";
 import { endpoint } from "../utils/dataSet";
 import { useEntities } from "../context/EntityContext";
@@ -103,14 +103,15 @@ export default function Gallery({ isSidebarOpen }: GalleryProps) {
     setShowUpdateModal(true);
   };
 
-  return (
-    <div
-      className={`min-h-screen bg-gray-50 transition-all duration-300 m-0
-        `}
-    >
+  return (<>
+  
+    <div className={`min-h-screen bg-gray-50 transition-all duration-300 m-0`}>
+    
+
       <div className="max-w-7xl mx-auto py-6">
+        <MobileHeader/>
         {/* Filters */}
-        <div className="bg-white rounded-lg shadow-sm p-4 mb-6">
+        <div className="bg-white rounded-lg shadow-sm p-4 mb-6 mt-16">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="relative">
               <Filter
@@ -189,7 +190,7 @@ export default function Gallery({ isSidebarOpen }: GalleryProps) {
               >
                 <div className="p-4 border-b flex justify-between	gap-3 ">
                   <div className="">
-                    <h2 className="text-xl font-semibold text-gray-900">
+                    <h2 className="text-sm font-semibold text-gray-900">
                       {project.projectName}
                     </h2>
                     <p className="text-sm text-gray-500 mt-1">
@@ -251,7 +252,7 @@ export default function Gallery({ isSidebarOpen }: GalleryProps) {
           }}
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
         >
-          <div className="bg-white rounded-xl shadow-xl  p-6 w-full max-w-xl">
+          <div className="bg-white rounded-xl shadow-xl  p-6 w-11/12">
             <h2 className="text-xl font-bold text-gray-900 mb-4">
               Update Project Gallery
             </h2>
@@ -336,7 +337,7 @@ export default function Gallery({ isSidebarOpen }: GalleryProps) {
         </div>
       )}
     </div>
-  );
+    </>);
 }
 
 // old code below.

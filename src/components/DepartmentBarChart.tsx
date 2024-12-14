@@ -17,7 +17,7 @@ export function DepartmentBarChart({ data }) {
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis 
             dataKey="name" 
-            angle={-45}
+            angle={-55} //old code was -45
             textAnchor="end"
             height={100}
             interval={0}

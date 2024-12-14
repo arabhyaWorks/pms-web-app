@@ -18,7 +18,19 @@ interface Props {
   data: DepartmentData[];
 }
 
+
+
 export function DepartmentPieChart({ data }: Props) {
+  
+const renderCustomizedLabel = ({  }) => {
+ 
+
+  return (
+    <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+      {`${data[index].name} (${value})`}
+    </text>
+  );
+};
   return (
     <div className="w-full h-[500px] mt-4">
       <ResponsiveContainer width="100%" height="100%">
@@ -28,33 +40,54 @@ export function DepartmentPieChart({ data }: Props) {
             cx="50%"
             cy="50%"
             labelLine={true}
+            // label={({
+            //   cx,
+            //   cy,
+            //   midAngle,
+            //   innerRadius,
+            //   outerRadius,
+            //   value,
+            //   index
+            // }) => {
+            //   const RADIAN = Math.PI / 180;
+            //   const radius = outerRadius * 1.35;
+            //   const x = cx + radius * Math.cos(-midAngle * RADIAN);
+            //   const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+            //   return (
+            //     <text
+            //       x={x}
+            //       y={y}
+            //       fill="#374151"
+            //       textAnchor={x > cx ? 'start' : 'end'}
+            //       dominantBaseline="central"
+            //       fontSize="12"
+            //     >
+            //       {`${data[index].name} (${value})`}
+            //     </text>
+            //   );
+            // }}
             label={({
-              cx,
-              cy,
-              midAngle,
-              innerRadius,
-              outerRadius,
-              value,
-              index
+              cx, cy, midAngle, innerRadius, outerRadius, value ,percent, index
             }) => {
               const RADIAN = Math.PI / 180;
-              const radius = outerRadius * 1.35;
-              const x = cx + radius * Math.cos(-midAngle * RADIAN);
-              const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
+              const radius = innerRadius + (outerRadius + innerRadius) * 0.5;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
               return (
                 <text
                   x={x}
                   y={y}
-                  fill="#374151"
+                  fill="black"
                   textAnchor={x > cx ? 'start' : 'end'}
                   dominantBaseline="central"
-                  fontSize="12"
+                  fontSize="11"
                 >
                   {`${data[index].name} (${value})`}
                 </text>
               );
             }}
+            // label={renderCustomizedLabel}
             outerRadius={160}
             fill="#8884d8"
             dataKey="value"

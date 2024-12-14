@@ -134,7 +134,7 @@ export default function HomePage() {
           <BudgetChart />
         </div>
         {/* Department-wise Project Count - Pie Chart */}
-      <div className="rounded-lg bg-white shadow">
+      <div className="rounded-lg bg-white shadow mt-6">
         <div className="px-6 py-5 flex justify-between items-center">
           <h3 className="text-lg font-medium leading-6 text-gray-900">
             Department-wise Project Count
@@ -160,7 +160,7 @@ export default function HomePage() {
         </div>
       </div>
       {/* Department-wise Project Count - Bar Chart */}
-      <div className="rounded-lg bg-white shadow">
+      <div className="rounded-lg bg-white shadow mt-6">
         <div className="px-6 py-5 flex justify-between items-center">
           <h3 className="text-lg font-medium leading-6 text-gray-900">
             Department-wise Project Count (Bar Chart)
@@ -175,7 +175,7 @@ export default function HomePage() {
             Export as PNG
           </button>
         </div>
-        <div ref={barChartRef} className="p-6">
+        <div ref={barChartRef} className="">
           <DepartmentBarChart data={departmentData} />
         </div>
       </div>

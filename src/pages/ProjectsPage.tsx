@@ -113,7 +113,7 @@ export default function ProjectsPage() {
         </div> */}
         
         {/* new search and filter */}
-        <div className="bg-white shadow-sm ring-1 ring-gray-900/5 rounded-lg overflow-hidden	">
+        <div className="bg-white shadow-sm ring-1 ring-gray-900/5 rounded-lg overflow-hidden mb-5">
         <div className="border-b border-gray-200 p-4">
           <ProjectFilters
             searchTerm={searchTerm}
