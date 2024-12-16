@@ -12,9 +12,11 @@ import MilestonePage from "./pages/MilestonePage";
 import WelcomePage from "./pages/WelcomePage";
 import LoginPage from "./pages/LoginPage";
 import HelpSupportPage from "./pages/HelpSupportPage";
+import { EntitiesProvider } from "./context/EntityContext";
 
 function App() {
   return (
+    <EntitiesProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<WelcomePage />} />
@@ -35,6 +37,7 @@ function App() {
         <Route path="*" element={<BottomNav />} />
       </Routes>
     </BrowserRouter>
+    </EntitiesProvider>
   );
 }
 

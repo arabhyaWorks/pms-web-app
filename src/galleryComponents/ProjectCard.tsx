@@ -12,6 +12,8 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project, onUploadClick }: ProjectCardProps) {
+ console.log(project);
+ 
   return (
     <div className="bg-white rounded-lg shadow-sm overflow-hidden">
       <div className="p-4">

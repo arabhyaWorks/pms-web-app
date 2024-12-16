@@ -1,95 +1,101 @@
-import React, { useState , useEffect } from 'react';
-import { Search, Plus, Filter, ChevronDown } from 'lucide-react';
+import React, { useState } from 'react';
 import MobileHeader from '../components/MobileHeader';
 import ProjectCard from '../components/ProjectCard';
-import { projectsData } from '../data/projects';
-import axios from 'axios';
-
+import SearchBar from '../components/filters/SearchBar';
+import ProjectFilterPanel from '../components/filters/ProjectFilterPanel';
+import { useProjects } from '../hooks/useProjects';
+import { Project } from '../types/project';
 
 export default function ProjectsPage() {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [showFilters, setShowFilters] = useState(false);
-  const [projects, setProjects] = useState([]);
+  const [selectedDepartment, setSelectedDepartment] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("");
+  const [selectedExecutiveAgency, setSelectedExecutiveAgency] = useState("");
+  
+  const { projects, isLoading, error } = useProjects();
 
-  async function fetchProjects() {
-    // const url = `${endpoint}/api/projects`;
-    const url = "https://pradyogik.in/api/projects/";
+  const filterProjects = (projects: Project[]) => {
+    return projects.filter((project) => {
+      const matchesSearch =
+        project.projectName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        project.executingAgency.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesDepartment =
+        !selectedDepartment || project.projectDepartment === selectedDepartment;
+      const matchesStatus =
+        !selectedStatus || project.projectStatus === selectedStatus;
+      const matchesExecutiveAgency =
+        !selectedExecutiveAgency || project.executingAgency === selectedExecutiveAgency;
+      return matchesSearch && matchesDepartment && matchesStatus && matchesExecutiveAgency;
+    });
+  };
 
-    // const params = {
-    //   department: "",
-    //   status: "",
-    // };
+  const filteredProjects = filterProjects(projects);
 
-    try {
-      const response = await axios.get(url, {
-        headers: {
-          "Content-Type": "application/json",
-          "ngrok-skip-browser-warning": "true", // Add this header
-        },
-        // params: params,
-      });
+  const handleResetFilters = () => {
+    setSelectedDepartment("");
+    setSelectedStatus("");
+    setSelectedExecutiveAgency("");
+  };
 
-      console.log("Response Data:", response.data);
-      // return response.data;
-
-      return setProjects(response.data);
-    } catch (error) {
-      console.error(
-        "Error fetching data:",
-        error.response ? error.response.data : error.message
-      );
-      throw error;
-    }
+  if (error) {
+    return (
+      <div className="pb-20 pt-16 bg-gray-50">
+        <MobileHeader />
+        <div className="px-4 py-4">
+          <div className="bg-red-50 text-red-600 p-4 rounded-lg">
+            {error}
+          </div>
+        </div>
+      </div>
+    );
   }
 
-  useEffect(() => {
-    fetchProjects();
-  }, []);
-
-  console.log(projects);  
-  
   return (
     <div className="pb-20 pt-16 bg-gray-50">
       <MobileHeader />
 
       <div className="px-4 py-4">
-        {/* Header Section */}
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-xl font-bold text-gray-900">Projects</h1>
-          {/* <button className="bg-orange-500 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 text-sm">
-            <Plus className="w-4 h-4" />
-            New Project
-          </button> */}
         </div>
 
-        {/* Search and Filter */}
-        <div className="space-y-3 mb-4">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Search projects..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg bg-white"
+        <div className="relative mb-4">
+          <SearchBar
+            searchTerm={searchTerm}
+            onSearchChange={setSearchTerm}
+            showFilters={showFilters}
+            onToggleFilters={() => setShowFilters(!showFilters)}
+          />
+
+          {showFilters && (
+            <ProjectFilterPanel
+              selectedDepartment={selectedDepartment}
+              onDepartmentChange={setSelectedDepartment}
+              selectedStatus={selectedStatus}
+              onStatusChange={setSelectedStatus}
+              selectedExecutiveAgency={selectedExecutiveAgency}
+              onExecutiveAgencyChange={setSelectedExecutiveAgency}
+              onClose={() => setShowFilters(false)}
+              onReset={handleResetFilters}
             />
-            <Search className="w-5 h-5 text-gray-400 absolute left-3 top-2.5" />
-          </div>
-{/* 
-          <button
-            onClick={() => setShowFilters(!showFilters)}
-            className="flex items-center gap-2 text-sm text-gray-600 bg-white px-3 py-2 rounded-lg border border-gray-300 w-full"
-          >
-            <Filter className="w-4 h-4" />
-            Filters
-            <ChevronDown className="w-4 h-4 ml-auto" />
-          </button> */}
+          )}
         </div>
 
-        {/* Projects List */}
         <div className="space-y-4">
-          {projects.map((project) => (
-            <ProjectCard key={1} project={project} />
-          ))}
+          {isLoading ? (
+            <div className="flex justify-center py-8">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500" />
+            </div>
+          ) : filteredProjects.length > 0 ? (
+            filteredProjects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))
+          ) : (
+            <div className="text-center py-8 text-gray-500">
+              No projects found
+            </div>
+          )}
         </div>
       </div>
     </div>
