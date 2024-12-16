@@ -10,6 +10,7 @@ import MobileHeader from "../components/MobileHeader";
 import axios from "axios";
 import { endpoint } from "../utils/dataSet";
 import { useEntities } from "../context/EntityContext";
+import { p } from "framer-motion/client";
 
 interface GalleryProps {
   isSidebarOpen: boolean;
@@ -27,10 +28,17 @@ export default function Gallery({ isSidebarOpen }: GalleryProps) {
   const [selectedAgency, setSelectedAgency] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [showUpdateModal, setShowUpdateModal] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<{ projectId?: number; projectName?: string }>({});
+  const [selectedProject, setSelectedProject] = useState<{
+    projectId?: number;
+    projectName?: string;
+  }>({});
   const [projectGallery, setProjectGallery] = useState<any[]>([]);
-  const [filterSelectedProject, setFilterSelectedProject] = useState<number | null>(null);
+  const [filterSelectedProject, setFilterSelectedProject] = useState<
+    number | null
+  >(null);
   const [file, setFile] = useState<File | null>(null); // File state
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null); // Store the image preview URL
+
   const [uploadData, setUploadData] = useState({
     imageDescription: "",
   });
@@ -70,20 +78,26 @@ export default function Gallery({ isSidebarOpen }: GalleryProps) {
       setLoading(false);
     }
   };
-
-  // Handle File Selection
+  // Handle file change
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0];
-      const validTypes = ["image/png", "image/jpeg", "application/pdf"];
-      if (!validTypes.includes(file.type)) {
-        setError("Invalid file type. Please upload an image or PDF.");
-        return;
+      const selectedFile = e.target.files[0];
+
+      // Only generate a preview if the selected file is an image
+      if (selectedFile.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          setPreviewUrl(reader.result as string); // Set the image preview URL
+        };
+        reader.readAsDataURL(selectedFile);
+      } else {
+        setPreviewUrl(null); // Reset preview if the file is not an image
       }
-      setFile(file);
-      setError(null);
+
+      setFile(selectedFile); // Set the selected file
     }
   };
+  p;
 
   // Handle Upload Image with FormData
   const handleUploadImage = async () => {
@@ -111,13 +125,16 @@ export default function Gallery({ isSidebarOpen }: GalleryProps) {
       setSuccessMessage("File uploaded successfully!");
       setShowUpdateModal(false);
       setFile(null);
+      // previewUrl
+      setPreviewUrl(null);
       setUploadData({
         imageDescription: "",
       });
       fetchProjectGallery(); // Refresh the gallery after upload
     } catch (error) {
       setError(
-        error.response?.data?.message || "Error uploading file. Please try again."
+        error.response?.data?.message ||
+          "Error uploading file. Please try again."
       );
     } finally {
       setLoading(false);
@@ -147,7 +164,9 @@ export default function Gallery({ isSidebarOpen }: GalleryProps) {
 
   return (
     <>
-      <div className={`min-h-screen bg-gray-50 transition-all duration-300 m-0`}>
+      <div
+        className={`min-h-screen bg-gray-50 transition-all duration-300 m-0`}
+      >
         <div className="max-w-7xl mx-auto py-6">
           <MobileHeader />
           {/* Filters */}
@@ -183,7 +202,9 @@ export default function Gallery({ isSidebarOpen }: GalleryProps) {
                 <select
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                   value={filterSelectedProject}
-                  onChange={(e) => setFilterSelectedProject(parseInt(e.target.value))}
+                  onChange={(e) =>
+                    setFilterSelectedProject(parseInt(e.target.value))
+                  }
                 >
                   <option value="">Project Names</option>
                   {projectGallery.map((project, index) => (
@@ -284,7 +305,9 @@ export default function Gallery({ isSidebarOpen }: GalleryProps) {
               </h2>
 
               {error && <p className="text-red-500 mb-4">{error}</p>}
-              {successMessage && <p className="text-green-500 mb-4">{successMessage}</p>}
+              {successMessage && (
+                <p className="text-green-500 mb-4">{successMessage}</p>
+              )}
 
               <div className="space-y-4">
                 <div>
@@ -302,10 +325,20 @@ export default function Gallery({ isSidebarOpen }: GalleryProps) {
                   </label>
                   <div className="flex items-center justify-center w-full">
                     <label className="w-full flex flex-col items-center px-4 py-6 bg-white rounded-lg border-2 border-gray-300 border-dashed cursor-pointer hover:border-orange-500">
-                      <Plus className="w-8 h-8 text-gray-400" />
-                      <span className="mt-2 text-sm text-gray-500">
-                        Click to upload or drag and drop
-                      </span>
+                      {previewUrl ? (
+                        <img
+                          src={previewUrl}
+                          alt="Preview"
+                          className="w-1/2 max-w-sm mx-auto rounded-lg shadow"
+                        />
+                      ) : (
+                        <>
+                          <Plus size={24} className="text-gray-400" />
+                          <p className="text-sm text-gray-400 mt-2">
+                            Click to select a file
+                          </p>
+                        </>
+                      )}
                       <input
                         type="file"
                         className="hidden"
@@ -314,6 +347,18 @@ export default function Gallery({ isSidebarOpen }: GalleryProps) {
                       />
                     </label>
                   </div>
+
+                  {/* Image Preview */}
+                  {/* {previewUrl && (
+        <div className="mt-4">
+          <p className="text-sm font-medium text-gray-700 mb-2">Image Preview:</p>
+          <img
+            src={previewUrl}
+            alt="Preview"
+            className="w-full max-w-sm mx-auto rounded-lg shadow"
+          />
+        </div>
+      )} */}
                 </div>
               </div>
 
@@ -337,7 +382,10 @@ export default function Gallery({ isSidebarOpen }: GalleryProps) {
 
               <div className="flex justify-end gap-3 mt-6">
                 <button
-                  onClick={() => setShowUpdateModal(false)}
+                  onClick={() => {
+                    setShowUpdateModal(false);
+                    setPreviewUrl(null);
+                  }}
                   className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
                 >
                   Cancel
