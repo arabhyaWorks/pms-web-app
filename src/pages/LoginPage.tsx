@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { User, Lock, Eye, EyeOff } from "lucide-react";
 import banner from "../assets/loginBanner.png";
 import axios from "axios";
+import { endpoint } from "../utils/dataSet";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -22,18 +23,20 @@ export default function LoginPage() {
     setErrorMessage(""); // Clear previous errors
 
     try {
-      const response = await axios.post("https://pms-backend-ochre.vercel.app/api/login", credentials);
+      const response = await axios.post(`${endpoint}/api/login`, credentials);
 
       if (response.data.success) {
-        console.log("Login successful:", response.data);
-        // Store token in localStorage
-        localStorage.setItem("authToken", response.data.token);
-        // Store user information if needed
-        localStorage.setItem("userInfo", JSON.stringify(response.data.user));
-        // Redirect to dashboard
+        const token = response.data.token;
+        const user = response.data.user;
+
+        console.log("Login successful:", user);
+
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user));
+
         navigate("/dashboard");
       } else {
-        setErrorMessage("Invalid email or password");
+        setErrorMessage("Invalid username or password.");
       }
     } catch (error) {
       console.error("Login error:", error);
