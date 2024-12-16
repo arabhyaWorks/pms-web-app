@@ -139,21 +139,7 @@ export default function HomePage() {
           <h3 className="text-lg font-medium leading-6 text-gray-900">
             Department-wise Project Count
           </h3>
-          <button
-            onClick={() =>
-              exportChartAsPNG(pieChartRef, "DepartmentWisePieChart")
-            }
-            className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-          >
-            <Download className="h-4 w-4 mr-1" />
-            Export as PNG
-          </button>
-          {/* <button
-            className="bg-blue-500 text-white px-3 py-1 rounded-md"
-            onClick={() => exportChartAsPNG(pieChartRef, "DepartmentWisePieChart")}
-          >
-            Export as PNG
-          </button> */}
+         
         </div>
         <div ref={pieChartRef} className="p-6">
           <DepartmentPieChart data={departmentData} />
@@ -163,9 +149,9 @@ export default function HomePage() {
       <div className="rounded-lg bg-white shadow mt-6">
         <div className="px-6 py-5 flex justify-between items-center">
           <h3 className="text-lg font-medium leading-6 text-gray-900">
-            Department-wise Project Count (Bar Chart)
+            Department-wise Project Count <br/> (Bar Chart)
           </h3>
-          <button
+          {/* <button
             onClick={() =>
               exportChartAsPNG(barChartRef, "DepartmentWiseBarChart")
             }
@@ -173,7 +159,7 @@ export default function HomePage() {
           >
             <Download className="h-4 w-4 mr-1" />
             Export as PNG
-          </button>
+          </button> */}
         </div>
         <div ref={barChartRef} className="">
           <DepartmentBarChart data={departmentData} />
