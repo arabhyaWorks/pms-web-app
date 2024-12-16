@@ -1,6 +1,6 @@
-import React from 'react';
-import { X } from 'lucide-react';
-import { useEntities } from '../../context/EntityContext';
+import React from "react";
+import { X } from "lucide-react";
+import { useEntities } from "../../context/EntityContext";
 
 const projectStatus = [
   "योजना चरण में",
@@ -19,6 +19,7 @@ interface ProjectFilterPanelProps {
   onExecutiveAgencyChange: (value: string) => void;
   onClose: () => void;
   onReset: () => void;
+  user: any;
 }
 
 export default function ProjectFilterPanel({
@@ -30,6 +31,7 @@ export default function ProjectFilterPanel({
   onExecutiveAgencyChange,
   onClose,
   onReset,
+  user,
 }: ProjectFilterPanelProps) {
   const { entities } = useEntities();
 
@@ -37,14 +39,11 @@ export default function ProjectFilterPanel({
     <div className="absolute z-10 mt-2 w-full bg-white rounded-lg shadow-lg border border-gray-200 p-4">
       <div className="flex justify-between items-center mb-4">
         <h3 className="font-medium text-gray-900">Filters</h3>
-        <button 
-          onClick={onClose}
-          className="text-gray-400 hover:text-gray-600"
-        >
+        <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
           <X className="w-5 h-5" />
         </button>
       </div>
-      
+
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -55,14 +54,20 @@ export default function ProjectFilterPanel({
             onChange={(e) => onDepartmentChange(e.target.value)}
             className="w-full rounded-lg border-gray-300 border p-2"
           >
-            <option value="">सभी विभाग</option>
-            {entities
-              ?.filter((entity) => entity.entity_type === 1)
-              .map((entity) => (
-                <option key={entity.id} value={entity.entity_name}>
-                  {entity.entity_name}
-                </option>
-              ))}
+            {user?.userRole === 1 ? (
+              <>
+                <option value="">सभी विभाग</option>
+                {entities
+                  ?.filter((entity) => entity.entity_type === 1)
+                  .map((entity) => (
+                    <option key={entity.id} value={entity.entity_name}>
+                      {entity.entity_name}
+                    </option>
+                  ))}
+              </>
+            ) : (
+              <option value={user?.entityName}>{user?.entityName}</option>
+            )}
           </select>
         </div>
 

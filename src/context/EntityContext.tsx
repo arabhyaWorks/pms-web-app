@@ -22,6 +22,7 @@ interface User {
 interface EntitiesContextType {
   entities: Entity[] | null;
   reloadEntities: () => Promise<void>;
+
   user: User | null;
   setUser: (user: User | null) => void;
   projectNameData: any;
@@ -42,9 +43,15 @@ export function EntitiesProvider({ children }: { children: React.ReactNode }) {
     try {
       const response = await axios.get(`${endpoint}/api/entities`);
       setEntities(response.data.data);
+      console.log(response.data);
     } catch (error) {
       console.error("Error fetching entities:", error);
     }
+  };
+
+  // Reload entities manually
+  const reloadEntities = async () => {
+    await fetchEntities();
   };
 
   // Fetch user from local storage and store in context state
@@ -77,12 +84,7 @@ export function EntitiesProvider({ children }: { children: React.ReactNode }) {
     setUserState(user);
   };
 
-  // Reload entities manually
-  const reloadEntities = async () => {
-    await fetchEntities();
-  };
-
-  // Fetch entities and user on mount
+  // Fetch entities on mount
   useEffect(() => {
     fetchEntities();
     fetchUser();

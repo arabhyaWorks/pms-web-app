@@ -16,28 +16,28 @@ import { EntitiesProvider } from "./context/EntityContext";
 
 function App() {
   return (
-    <EntitiesProvider>
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<WelcomePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/dashboard" element={<HomePage />} />
-        <Route path="/gallery" element={<ProjectGallery />} />
-        <Route path="/projects" element={<ProjectsPage />} />
-        <Route path="/issues" element={<IssuesPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/privacy" element={<PrivacyPolicyPage />} />
-        <Route path="/milestones" element={<MilestonePage />} />
-        <Route path="/help" element={<HelpSupportPage />} />
-      </Routes>
-      {/* Only show BottomNav for authenticated routes */}
-      <Routes>
-        <Route path="/" element={null} />
-        <Route path="/login" element={null} />
-        <Route path="*" element={<BottomNav />} />
-      </Routes>
+      <EntitiesProvider>
+        <Routes>
+          <Route path="/" element={<WelcomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/dashboard" element={<HomePage />} />
+          <Route path="/gallery" element={<ProjectGallery />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/issues" element={<IssuesPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/privacy" element={<PrivacyPolicyPage />} />
+          <Route path="/milestones" element={<MilestonePage />} />
+          <Route path="/help" element={<HelpSupportPage />} />
+        </Routes>
+      </EntitiesProvider>
+        {/* Only show BottomNav for authenticated routes */}
+        <Routes>
+          <Route path="/" element={null} />
+          <Route path="/login" element={null} />
+          <Route path="*" element={<BottomNav />} />
+        </Routes>
     </BrowserRouter>
-    </EntitiesProvider>
   );
 }
 

@@ -131,6 +131,7 @@ export default function ProjectsPage() {
               onExecutiveAgencyChange={setSelectedExecutiveAgency}
               onClose={() => setShowFilters(false)}
               onReset={handleResetFilters}
+              user={user}
             />
           )}
         </div>
