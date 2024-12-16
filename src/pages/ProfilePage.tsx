@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   User,
@@ -13,17 +13,28 @@ import {
 } from "lucide-react";
 import MobileHeader from "../components/MobileHeader";
 import DeleteAccountModal from "../components/DeleteAccountModal";
+import { endpoint } from "../utils/dataSet";
+import { useEntities } from "../context/EntityContext";
+import { use } from "framer-motion/client";
 
 export default function ProfilePage() {
   const navigate = useNavigate();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const { user } = useEntities();
+  const USER_ROLES = [
+    "Super Admin",
+    "Admin",
+    "Project Manager",
+    "Data Operator",
+  ];
 
   const profileData = {
-    name: "Rajesh Kumar",
-    email: "rajesh.kumar@gov.in",
-    phone: "+91 9876543210",
-    designation: "Project Manager",
-    agency: "Central Public Works Department (CPWD)",
+    name: user?.userName || "",
+    email: user?.userEmail || "",
+    phone: user?.userPhoneNumber || "",
+    userRole: user?.userRole || "",
+    designation: user?.userDesignation || "",
+    agency: user?.entityName || "",
   };
 
   const handleLogout = () => {
@@ -70,6 +81,10 @@ export default function ProfilePage() {
     },
   ];
 
+  useEffect(() => {
+    console.log("User", user);
+  }, [user]);
+
   return (
     <div className="min-h-screen bg-gray-50 pb-20 pt-16">
       <MobileHeader />
@@ -99,6 +114,12 @@ export default function ProfilePage() {
                 <span className="text-sm">{profileData.phone}</span>
               </div>
 
+              <div className="flex items-center gap-2 text-gray-600">
+                <User className="w-4 h-4" />
+                <span className="text-sm">
+                  {USER_ROLES[parseInt(profileData.userRole) - 1]}
+                </span>
+              </div>
               <div className="flex items-center gap-2 text-gray-600">
                 <User className="w-4 h-4" />
                 <span className="text-sm">{profileData.designation}</span>
