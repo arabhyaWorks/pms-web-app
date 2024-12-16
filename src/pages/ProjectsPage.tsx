@@ -40,10 +40,10 @@ export default function ProjectsPage() {
         // params: params,
       });
 
-      console.log("Response Data:", response.data);
+      console.log("Response Data:", response.data.data);
       // return response.data;
 
-      return setProjects(response.data);
+      return setProjects(response.data.data);
     } catch (error) {
       console.error(
         "Error fetching data:",
@@ -52,9 +52,11 @@ export default function ProjectsPage() {
       throw error;
     }
   }
+  console.log(projects);
+// console.log(filteredProjects);
 
   const filteredProjects = projects.filter((project) => {
-    console.log(project);
+    // console.log(filteredProjects);
     
     const matchesSearch =
       project.projectName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -67,6 +69,9 @@ export default function ProjectsPage() {
       !selectedExecutiveAgency || project.executingAgency === selectedExecutiveAgency
     return matchesSearch && matchesDepartment && matchesStatus && matchesExecutiveAgency;
   });
+
+
+
 
   useEffect(() => {
     fetchProjects();
