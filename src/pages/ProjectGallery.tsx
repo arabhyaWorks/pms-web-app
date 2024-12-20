@@ -17,7 +17,9 @@ interface GalleryProps {
 }
 
 export default function Gallery({ isSidebarOpen }: GalleryProps) {
-  const { user, entities } = useEntities();
+  const { entities } = useEntities();
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
@@ -173,12 +175,12 @@ export default function Gallery({ isSidebarOpen }: GalleryProps) {
           <div className="bg-white rounded-lg shadow-sm p-4 mb-6 mt-16">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="relative">
-                <Filter
+                {/* <Filter
                   className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
                   size={20}
-                />
+                /> */}
                 <select
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                  className="w-full pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                   value={selectedAgency}
                   onChange={(e) => setSelectedAgency(e.target.value)}
                 >
@@ -195,12 +197,12 @@ export default function Gallery({ isSidebarOpen }: GalleryProps) {
                 </select>
               </div>
               <div className="relative">
-                <Filter
+                {/* <Filter
                   className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
                   size={20}
-                />
+                /> */}
                 <select
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                  className="w-full  pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                   value={filterSelectedProject}
                   onChange={(e) =>
                     setFilterSelectedProject(parseInt(e.target.value))

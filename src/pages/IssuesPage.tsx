@@ -81,6 +81,8 @@ export default function IssuesPage() {
           ))}
         </div>
       </div>
+
+      
     </div>
   );
 }

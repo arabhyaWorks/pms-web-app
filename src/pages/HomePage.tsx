@@ -13,7 +13,9 @@ import { DepartmentBarChart } from "../components/DepartmentBarChart.tsx";
 import { Download } from "lucide-react";
 
 export default function HomePage() {
-  const { user, entities, reloadEntities } = useEntities();
+  const { entities, reloadEntities } = useEntities();
+  // const user = JSON.parse(localStorage.getItem("user"));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const [dashboardStats, setDashboardStats] = useState({});
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);

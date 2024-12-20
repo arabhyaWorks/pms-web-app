@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
-import { Search, Plus, Filter, ChevronDown, Calendar, Clock, CheckCircle } from 'lucide-react';
-import MobileHeader from '../components/MobileHeader';
+import React, { useState } from "react";
+import {
+  Search,
+  Plus,
+  Filter,
+  ChevronDown,
+  Calendar,
+  Clock,
+  CheckCircle,
+} from "lucide-react";
+import MobileHeader from "../components/MobileHeader";
+import milestoneImage from "../assets/comingSoon.webp";
 
 interface Milestone {
   id: number;
   projectName: string;
-  status: 'Complete' | 'In Progress';
+  status: "Complete" | "In Progress";
   startDate: string;
   endDate: string;
   progress: number;
@@ -14,46 +23,50 @@ interface Milestone {
 const milestoneData: Milestone[] = [
   {
     id: 1,
-    projectName: 'Project Estimate for construction of crated stone Boulder cutter to prevent of erosion in 450 meter length at right bank of river Ganga in village- Mahuji, Block- Dhanapur Tahsil- Sakaldiha, Distt- Chandauli.',
-    status: 'Complete',
-    startDate: '29-12-2022',
-    endDate: '-',
-    progress: 100
+    projectName:
+      "Project Estimate for construction of crated stone Boulder cutter to prevent of erosion in 450 meter length at right bank of river Ganga in village- Mahuji, Block- Dhanapur Tahsil- Sakaldiha, Distt- Chandauli.",
+    status: "Complete",
+    startDate: "29-12-2022",
+    endDate: "-",
+    progress: 100,
   },
   {
     id: 2,
-    projectName: 'R.O.B. IN LIEU OF LC No.-102B/3E ON CHANDAULI- SAKALDIHA ROAD BETWEEN KUCHAMAN-SAKALDIHA RAILWAY STATION OF ECR RAIL SECTION IN DISTT. CHANDAULI',
-    status: 'In Progress',
-    startDate: '10-07-2023',
-    endDate: '-',
-    progress: 65
-  }
+    projectName:
+      "R.O.B. IN LIEU OF LC No.-102B/3E ON CHANDAULI- SAKALDIHA ROAD BETWEEN KUCHAMAN-SAKALDIHA RAILWAY STATION OF ECR RAIL SECTION IN DISTT. CHANDAULI",
+    status: "In Progress",
+    startDate: "10-07-2023",
+    endDate: "-",
+    progress: 65,
+  },
 ];
 
 export default function MilestonePage() {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [showFilters, setShowFilters] = useState(false);
-  const [entriesCount, setEntriesCount] = useState('10');
+  const [entriesCount, setEntriesCount] = useState("10");
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'Complete':
-        return 'bg-green-100 text-green-800';
-      case 'In Progress':
-        return 'bg-blue-100 text-blue-800';
+      case "Complete":
+        return "bg-green-100 text-green-800";
+      case "In Progress":
+        return "bg-blue-100 text-blue-800";
       default:
-        return 'bg-gray-100 text-gray-800';
+        return "bg-gray-100 text-gray-800";
     }
   };
 
   return (
     <div className="pb-20 pt-16 bg-gray-50 min-h-screen">
       <MobileHeader />
-      
+
       <div className="px-4 py-4">
         {/* Header Section */}
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-xl font-bold text-gray-900">Milestone Management</h1>
+          <h1 className="text-xl font-bold text-gray-900">
+            Milestone Management
+          </h1>
           {/* <button className="bg-orange-500 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 text-sm">
             <Plus className="w-4 h-4" />
             Create Milestone
@@ -61,8 +74,13 @@ export default function MilestonePage() {
         </div>
 
         {/* Search and Filter */}
-        <div className="space-y-3 mb-4">
-          <select 
+        <div
+          style={{
+            display: "none",
+          }}
+          className="space-y-3 mb-4"
+        >
+          <select
             value={entriesCount}
             onChange={(e) => setEntriesCount(e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm"
@@ -94,12 +112,24 @@ export default function MilestonePage() {
         </div>
 
         {/* Milestones List */}
-        <div className="space-y-4">
+        <div
+          style={{
+            display: "none",
+          }}
+          className="space-y-4"
+        >
           {milestoneData.map((milestone) => (
-            <div key={milestone.id} className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div
+              key={milestone.id}
+              className="bg-white rounded-lg shadow-sm border border-gray-200 p-4"
+            >
               <div className="flex justify-between items-start gap-2 mb-3">
                 <span className="text-sm text-gray-500">#{milestone.id}</span>
-                <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(milestone.status)}`}>
+                <span
+                  className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(
+                    milestone.status
+                  )}`}
+                >
                   {milestone.status}
                 </span>
               </div>
@@ -113,7 +143,7 @@ export default function MilestonePage() {
                   <Calendar className="w-4 h-4" />
                   <span>Start: {milestone.startDate}</span>
                 </div>
-                
+
                 <div className="flex items-center gap-2 text-sm text-gray-600">
                   <Clock className="w-4 h-4" />
                   <span>End: {milestone.endDate}</span>
@@ -143,6 +173,12 @@ export default function MilestonePage() {
               </div> */}
             </div>
           ))}
+        </div>
+
+
+        <div className="space-y-4">
+          <img src={milestoneImage} alt="Milestone" className="w-full" />
+
         </div>
       </div>
     </div>

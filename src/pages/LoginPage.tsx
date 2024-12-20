@@ -34,7 +34,12 @@ export default function LoginPage() {
         localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(user));
 
-        navigate("/dashboard");
+        navigate("/dashboard", {
+          state: {
+            user: user,
+            fromLogin: true,
+          },
+        });
       } else {
         setErrorMessage("Invalid username or password.");
       }

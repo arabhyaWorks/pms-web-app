@@ -10,7 +10,9 @@ import { endpoint } from "../utils/dataSet";
 import { useEntities } from "../context/EntityContext";
 
 export default function ProjectsPage() {
-  const { user, entities, reloadEntities } = useEntities();
+  const { entities, reloadEntities } = useEntities();
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
