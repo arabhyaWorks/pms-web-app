@@ -10,7 +10,7 @@ export default function BottomNav() {
     { icon: Home, label: 'Home', path: '/dashboard' },
     { icon: Images, label: 'Gallery', path: '/gallery' },
     { icon: FolderOpen, label: 'Projects', path: '/projects' },
-    { icon: Milestone, label: 'Milestones', path: '/milestones' },
+    // { icon: Milestone, label: 'Milestones', path: '/milestones' },
     { icon: AlertCircle, label: 'Issues', path: '/issues' },
   ];
 

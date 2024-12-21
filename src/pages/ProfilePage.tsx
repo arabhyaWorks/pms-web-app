@@ -20,7 +20,7 @@ import { use } from "framer-motion/client";
 export default function ProfilePage() {
   const navigate = useNavigate();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const { user } = useEntities();
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const USER_ROLES = [
     "Super Admin",
     "Admin",
@@ -109,10 +109,10 @@ export default function ProfilePage() {
                 <span className="text-sm">{profileData.email}</span>
               </div>
 
-              <div className="flex items-center gap-2 text-gray-600">
+              {/* <div className="flex items-center gap-2 text-gray-600">
                 <Phone className="w-4 h-4" />
                 <span className="text-sm">{profileData.phone}</span>
-              </div>
+              </div> */}
 
               <div className="flex items-center gap-2 text-gray-600">
                 <User className="w-4 h-4" />
