@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Home, Images, FolderOpen, AlertCircle, Milestone } from 'lucide-react';
+import { Home, Images, FolderOpen, AlertCircle, Milestone, BarChart2 } from 'lucide-react';
 
 export default function BottomNav() {
   const navigate = useNavigate();
@@ -11,6 +11,8 @@ export default function BottomNav() {
     { icon: Images, label: 'Gallery', path: '/gallery' },
     { icon: FolderOpen, label: 'Projects', path: '/projects' },
     // { icon: Milestone, label: 'Milestones', path: '/milestones' },
+    { icon: BarChart2, label: 'Reports', path: '/reports' },
+
     { icon: AlertCircle, label: 'Issues', path: '/issues' },
   ];
 

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
+
 import MobileHeader from "../components/MobileHeader";
 import ProjectCard from "../components/ProjectCard";
 import SearchBar from "../components/filters/SearchBar";
@@ -12,6 +14,9 @@ import { useEntities } from "../context/EntityContext";
 export default function ProjectsPage() {
   const { entities, reloadEntities } = useEntities();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+  const location = useLocation();
+
+  const { state } = location;
 
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -24,6 +29,22 @@ export default function ProjectsPage() {
   const [selectedExecutiveAgency, setSelectedExecutiveAgency] = useState("");
 
   // const { projects, isLoading, error } = useProjects();
+
+  useEffect(() => {
+    console.log("state", state);
+    // Check if navigating from dashboard with department filter
+    if (state?.fromDashboard && state?.selectedDepartment) {
+      setSelectedDepartment(state.selectedDepartment);
+      // Clear the state to prevent filter from persisting on manual navigation
+      window.history.replaceState({}, document.title);
+    }
+
+    if (state?.fromDashboard && state?.selectedProjectStatus) {
+      setSelectedStatus(state.selectedProjectStatus);
+      // Clear the state to prevent filter from persisting on manual navigation
+      window.history.replaceState({}, document.title);
+    }
+  }, [state]);
 
   const filterProjects = (projects: Project[]) => {
     return projects.filter((project) => {
@@ -106,6 +127,26 @@ export default function ProjectsPage() {
     );
   }
 
+
+
+  const getStatusValue = (status: string) => {
+    switch (status) {
+      case "1":
+        return "योजना चरण में";
+      case "2":
+        return "प्रगति पर है";
+      case "3":
+        return "रोक पर";
+      case "4":
+        return "विलंबित";
+      case "5":
+        return "पूर्ण हुआ";
+      default:
+        return "N/A";
+    }
+  };
+  
+
   return (
     <div className="pb-20 pt-16 bg-gray-50">
       <MobileHeader />
@@ -136,6 +177,28 @@ export default function ProjectsPage() {
               user={user}
             />
           )}
+
+          <div className="flex gap-2 mt-1">
+            {selectedExecutiveAgency && (
+              <p className="px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                {selectedExecutiveAgency}
+              </p>
+            )}
+            {
+              selectedDepartment && (
+                <p className="px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                  {selectedDepartment}
+                </p>
+              )
+            }
+            {
+              selectedStatus && (
+                <p className="px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                  {getStatusValue(selectedStatus)}
+                </p>
+              )
+            }
+          </div>
         </div>
 
         <div className="space-y-4">

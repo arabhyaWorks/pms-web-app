@@ -49,6 +49,8 @@ function App() {
         <Route path="/dashboard" element={<HomePage />} />
         <Route path="/gallery" element={<ProjectGallery />} />
         <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/reports" element={<ReportsPage />} />
+
         <Route path="/issues" element={<IssuesPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/privacy" element={<PrivacyPolicyPage />} />

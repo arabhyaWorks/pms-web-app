@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   ChevronDown,
   ChevronUp,
   Calendar,
   IndianRupee,
   Activity,
-} from 'lucide-react';
+  ImageIcon,
+} from "lucide-react";
 
-import { convertToIST } from '../utils/function';
+import { convertToIST } from "../utils/function";
 
 interface ProjectCardProps {
   project: {
@@ -23,46 +24,42 @@ interface ProjectCardProps {
   };
 }
 
-
 export default function ProjectCard({ project }: ProjectCardProps) {
   const [expanded, setExpanded] = useState(false);
 
-  
-
-
   const getStatusColor = (status: string) => {
     switch (status) {
-      case '1':
-        return 'bg-yellow-100 text-yellow-800';
-      case '2':
-        return 'bg-green-100 text-green-800';
-      case '3':
-        return 'bg-gray-100 text-gray-800';
-        case '4':
-        return 'bg-red-100 text-red-800';
-        case '5':
-        return 'bg-green-100 text-green-800';
+      case "1":
+        return "bg-yellow-100 text-yellow-800";
+      case "2":
+        return "bg-green-100 text-green-800";
+      case "3":
+        return "bg-gray-100 text-gray-800";
+      case "4":
+        return "bg-red-100 text-red-800";
+      case "5":
+        return "bg-green-100 text-green-800";
       default:
-        return 'bg-green-100 text-green-800';
+        return "bg-green-100 text-green-800";
     }
   };
 
   const getStatusValue = (status: string) => {
-    switch(status){
-      case '1':
-        return 'योजना चरण में';
-      case '2':
-        return 'प्रगति पर है';
-      case '3': 
-        return 'रोक पर';
-      case '4':
-        return 'विलंबित';
-      case '5':
-        return 'पूर्ण हुआ'
+    switch (status) {
+      case "1":
+        return "योजना चरण में";
+      case "2":
+        return "प्रगति पर है";
+      case "3":
+        return "रोक पर";
+      case "4":
+        return "विलंबित";
+      case "5":
+        return "पूर्ण हुआ";
       default:
-        return 'N/A';
+        return "N/A";
     }
-  }
+  };
 
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200">
@@ -151,13 +148,47 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
       {/* Expanded Details */}
       {expanded && (
-        <div className="px-4 pb-4 border-t">
+        <div className="px-4 pb-4 border-t-0">
           <div className="space-y-3 pt-3">
             <div>
               <label className="text-xs text-gray-500">Executing Agency</label>
               <p className="text-sm text-gray-900">{project.executingAgency}</p>
             </div>
             {/* Add more details as needed */}
+          </div>
+          <div className="grid grid-cols-2 gap-4 pt-2">
+            <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
+              {project.geoTaggedPhotosLastMonth ? (
+                <img
+                  src={project.geoTaggedPhotosLastMonth}
+                  alt="Project Gallery"
+                  className="w-full h-full object-cover rounded-lg"
+                />
+              ) : (
+                <div className="text-center p-4">
+                  <ImageIcon className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+                  <p className="text-sm text-gray-500">
+                    गत माह की जियोटैग युक्त फोटोग्राफ
+                  </p>
+                </div>
+              )}
+            </div>
+            <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
+              {project.geoTaggedPhotosCurrentMonth ? (
+                <img
+                  src={project.geoTaggedPhotosCurrentMonth}
+                  alt="Project Gallery"
+                  className="w-full h-full object-cover rounded-lg"
+                />
+              ) : (
+                <div className="text-center p-4">
+                  <ImageIcon className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+                  <p className="text-sm text-gray-500">
+                    वर्तमान माह की जियोटैग युक्त फोटोग्राफ
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}

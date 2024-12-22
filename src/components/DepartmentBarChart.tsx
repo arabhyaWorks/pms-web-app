@@ -1,5 +1,6 @@
 import React from "react";
-import { TrendingUp, TrendingDown } from "lucide-react";
+import { TrendingUp, TrendingDown, AlertCircle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface DepartmentData {
   name: string;
@@ -11,6 +12,13 @@ interface Props {
 }
 
 export function DepartmentBarChart({ data }: Props) {
+  const navigate = useNavigate();
+  const getIssuesCount = (department: string) => {
+    // Fetch issues count for the department
+    return 0;
+  };
+
+
   // Sort data by value in descending order
   const sortedData = [...data].sort((a, b) => b.value - a.value);
   const maxValue = Math.max(...data.map((item) => item.value));
@@ -64,6 +72,14 @@ export function DepartmentBarChart({ data }: Props) {
                 </h3>
                 <p className="text-xs text-gray-500">{item.value} Projects</p>
               </div>
+
+              <button
+                onClick={() => navigate('/issues')}
+                className="flex items-center gap-1 px-3 py-1 bg-red-50 text-red-600 rounded-full text-xs font-medium hover:bg-red-100 transition-colors"
+              >
+                <AlertCircle className="w-3 h-3" />
+                {item.issues} Issues
+              </button>
               <span
                 className={`text-xs px-2 py-1 rounded-full ${
                   index === 0

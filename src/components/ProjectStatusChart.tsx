@@ -1,27 +1,42 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "bottom" as const,
-      labels: {
-        usePointStyle: true,
-        padding: 20,
+export default function ProjectStatusChart({ labels, counts }) {
+  const navigate = useNavigate();
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "bottom" as const,
+        labels: {
+          usePointStyle: true,
+          padding: 20,
+        },
       },
     },
-  },
-};
+    onClick: (event, elements, chart) => {
+      // elements[0] contains the information about the clicked section
+      console.log(elements[0].index);
 
-export default function ProjectStatusChart({ labels, counts }) {
-
+      navigate("/projects", {
+        state: {
+          selectedProjectStatus: `${parseInt(elements[0].index) + 1}`,
+          fromDashboard: true,
+        },
+      });
+      if (elements && elements.length > 0) {
+        
+      }
+    },
+  };
 
   const statusData = {
-    labels:labels,
+    labels: labels,
     datasets: [
       {
         data: counts,
@@ -36,6 +51,7 @@ export default function ProjectStatusChart({ labels, counts }) {
       },
     ],
   };
+
   return (
     <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
       <h2 className="text-lg font-semibold mb-4">

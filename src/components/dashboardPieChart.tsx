@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import {
   PieChart,
   Pie,
@@ -41,6 +42,7 @@ interface Props {
 }
 
 export function DepartmentPieChart({ data }: Props) {
+  const navigate = useNavigate();
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       return (
@@ -100,6 +102,14 @@ export function DepartmentPieChart({ data }: Props) {
                 fill={COLORS[index % COLORS.length]}
                 stroke="#fff"
                 strokeWidth={2}
+                onClick={() => {
+                  navigate("/projects", {
+                    state: {
+                      selectedDepartment: entry.name,
+                      fromDashboard: true,
+                    },
+                  });
+                }}
               />
             ))}
           </Pie>
