@@ -195,7 +195,7 @@ export default function ReportsPage() {
 
         <div className="space-y-6">
           {filteredProjects.map((project) => (
-            <div key={project.id} className="bg-white rounded-lg shadow-sm p-4">
+            <div key={project.id} className="bg-white  rounded-lg shadow-sm p-4 border border-gray-300">
               {/* Project Header */}
               <div className="border-b pb-4 mb-1">
                 <div className="flex justify-between items-start gap-4 mb-3">
