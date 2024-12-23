@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { TrendingUp, BarChart2, Clock, Share2, Building2, IndianRupee, Activity, Users } from "lucide-react";
 import image from "../assets/image.png";
@@ -14,6 +14,7 @@ export default function WelcomePage() {
   const navigate = useNavigate();
   const [dashboardStats, setDashboardStats] = useState({});
   const [departmentData, setDepartmentData] = useState([]);
+  const pieChartRef = useRef(null);
 
   const fetchDashboardStats = async () => {
     try {
@@ -139,7 +140,7 @@ export default function WelcomePage() {
       {/* Dashboard Stats Section */}
       <div className="px-4 py-6 bg-gray-50">
         <h2 className="text-[20px] font-bold text-black mb-6">Project Overview</h2>
-        
+
         <div className="grid grid-cols-1 gap-4 mb-6">
           <StatsCard
             label="Total Projects"
@@ -169,6 +170,9 @@ export default function WelcomePage() {
             counts={projectStatusCounts}
           />
           <BudgetChart budgetData={budgetData} />
+        </div>
+        <div ref={pieChartRef} className="p-6">
+          <DepartmentPieChart data={departmentData} />
         </div>
       </div>
 
