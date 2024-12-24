@@ -81,6 +81,12 @@ export default function ProfilePage() {
     },
   ];
 
+  const isIOS =
+  /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+  console.log("isIOS", isIOS);  
+
+
   useEffect(() => {
     console.log("User", user);
   }, [user]);
@@ -125,10 +131,13 @@ export default function ProfilePage() {
                 <span className="text-sm">{profileData.designation}</span>
               </div>
 
-              <div className="flex items-center gap-2 text-gray-600">
-                <Building className="w-4 h-4" />
-                <span className="text-sm">{profileData.agency}</span>
-              </div>
+              {
+                !isIOS ? 
+                <div className="flex items-center gap-2 text-gray-600">
+                  <Building className="w-4 h-4" />
+                  <span className="text-sm">{profileData.agency}</span>
+                </div> : null
+              }
             </div>
           </div>
         </div>

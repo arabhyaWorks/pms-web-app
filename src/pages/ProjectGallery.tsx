@@ -164,7 +164,8 @@ export default function Gallery({ isSidebarOpen }: GalleryProps) {
     setShowUpdateModal(true);
   };
 
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const isIOS =
+    /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
   return (
     <>
@@ -252,15 +253,17 @@ export default function Gallery({ isSidebarOpen }: GalleryProps) {
                       </p>
                     </div>
 
-                   {!isIOS ? <div className="">
-                    <button
-                      onClick={() => handleUpdateProgress(project)}
-                      className="w-[170px] px-4 py-2 bg-orange-500 text-white rounded-lg flex items-center gap-2 hover:bg-orange-600 transition-colors"
-                    >
-                      <ImageIcon size={20} />
-                      Upload Images
-                    </button>
-                  </div> : null}
+                    {!isIOS ? (
+                      <div className="">
+                        <button
+                          onClick={() => handleUpdateProgress(project)}
+                          className="w-[170px] px-4 py-2 bg-orange-500 text-white rounded-lg flex items-center gap-2 hover:bg-orange-600 transition-colors"
+                        >
+                          <ImageIcon size={20} />
+                          Upload Images
+                        </button>
+                      </div>
+                    ) : null}
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
